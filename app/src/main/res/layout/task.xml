@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="16dp"
+    android:background="?attr/back_primary"
+    android:paddingBottom="16dp">
+
+    <CheckBox
+        android:id="@+id/complete_check_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:minWidth="48dp"
+        android:checked="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/priority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:src="@drawable/low_priority"
+        app:layout_constraintStart_toEndOf="@id/complete_check_box"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="18dp">
+    </ImageView>
+
+    <TextView
+        android:id="@+id/task_text"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:text="text"
+        android:textColor="?attr/label_primary"
+        android:textSize="16sp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toStartOf="@id/info"
+        app:layout_constraintStart_toEndOf="@+id/priority"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/back_primary"
+        android:src="@drawable/info_outline"
+        android:layout_marginEnd="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/task_text" />
+
+    <TextView
+        android:id="@+id/date"
+        android:textColor="@color/label_light_tertiary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="date"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/task_text"
+        app:layout_constraintTop_toBottomOf="@+id/task_text" />
+</androidx.constraintlayout.widget.ConstraintLayout>
