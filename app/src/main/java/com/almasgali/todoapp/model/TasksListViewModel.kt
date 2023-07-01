@@ -1,13 +1,11 @@
 package com.almasgali.todoapp.model
 
 import androidx.lifecycle.ViewModel
-import com.almasgali.todoapp.util.TodoItem
-import com.almasgali.todoapp.util.TodoItemsRepository
+import androidx.room.Room
+import com.almasgali.todoapp.data.TodoItem
+import com.almasgali.todoapp.data.TodoItemsRepository
 
 class TasksListViewModel: ViewModel() {
-
-    private val list = TodoItemsRepository.getInstance().getList()
-
     var toEdit = false
     var isHidden = false
     var todoItem: TodoItem? = null

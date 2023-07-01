@@ -1,20 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.ToDoApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="support_separator">@color/support_dark_separator</item>
-        <item name="support_overlay">@color/support_dark_overlay</item>
-        <item name="label_primary">@color/label_dark_primary</item>
-        <item name="label_secondary">@color/label_dark_secondary</item>
-        <item name="label_tertiary">@color/label_dark_tertiary</item>
-        <item name="label_disable">@color/label_dark_disable</item>
-        <item name="color_red">@color/color_dark_red</item>
-        <item name="color_green">@color/color_dark_green</item>
-        <item name="color_blue">@color/color_dark_blue</item>
-        <item name="color_gray">@color/color_dark_gray</item>
-        <item name="color_gray_light">@color/color_dark_gray_light</item>
-        <item name="color_white">@color/color_dark_white</item>
-        <item name="back_primary">@color/back_dark_primary</item>
-        <item name="back_secondary">@color/back_dark_secondary</item>
-        <item name="back_elevated">@color/back_dark_elevated</item>
+
+    <style name="Theme.TodoApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/back_primary</item>
+        <item name="android:popupBackground">@color/back_elevated</item>
+        <item name="android:textColor">@color/label_primary</item>
+        <item name="android:textColorPrimary">@color/label_primary</item>
+        <item name="android:textColorSecondary">@color/label_secondary</item>
+        <item name="android:textColorTertiary">@color/label_tertiary</item>
+        <item name="colorControlNormal">@color/blue</item>
+        <item name="colorPrimary">@color/back_primary</item>
+        <item name="android:statusBarColor">@color/back_primary</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorAccent">@color/blue</item>
     </style>
 </resources>

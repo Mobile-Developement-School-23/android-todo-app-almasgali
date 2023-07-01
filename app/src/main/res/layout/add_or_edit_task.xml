@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/back_primary">
+        android:layout_height="match_parent">
 
         <ImageButton
             android:id="@+id/close_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="24dp"
+            android:contentDescription="@string/close"
+            android:src="@drawable/close"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="24dp"
-            android:layout_marginStart="12dp"
-            android:background="?attr/back_primary"
-            android:src="@drawable/close"
-            android:contentDescription="@string/close">
+            android:backgroundTint="@color/back_primary">
+
         </ImageButton>
 
         <TextView
             android:id="@+id/save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="24dp"
-            android:textColor="?attr/color_blue"
             android:layout_marginEnd="12dp"
             android:text="@string/save"
-            android:textSize="18sp">
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
         </TextView>
 
         <androidx.cardview.widget.CardView
@@ -40,22 +40,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
             android:minHeight="128dp"
-            app:cardBackgroundColor="?attr/back_primary"
             app:cardCornerRadius="8dp"
-            android:layout_marginTop="12dp"
-            app:layout_constraintTop_toBottomOf="@+id/close_button"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/close_button">
 
             <EditText
-                android:background="?attr/back_primary"
                 android:id="@+id/edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/fill_hint"
-                android:textColor="?attr/label_primary"
                 android:inputType="textMultiLine">
+
             </EditText>
 
         </androidx.cardview.widget.CardView>
@@ -65,29 +63,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/importance"
-            android:textColor="?attr/label_primary"
             app:layout_constraintStart_toStartOf="@id/edit_card"
-            app:layout_constraintTop_toBottomOf="@id/edit_card"/>
+            app:layout_constraintTop_toBottomOf="@id/edit_card" />
 
         <TextView
             android:id="@+id/importance_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/medium"
-            android:textColor="?attr/label_tertiary"
+            android:textColor="@color/label_tertiary"
             app:layout_constraintStart_toStartOf="@id/importance"
-            app:layout_constraintTop_toBottomOf="@id/importance"/>
+            app:layout_constraintTop_toBottomOf="@id/importance" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/deadline"
+            style="@style/SwitchStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
             android:text="@string/deadline"
-            android:textColor="?attr/label_primary"
-            app:layout_constraintTop_toBottomOf="@id/importance_type"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/importance_type">
+
         </androidx.appcompat.widget.SwitchCompat>
 
         <TextView
@@ -95,32 +93,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/medium"
-            android:textColor="?attr/label_tertiary"
+            android:textColor="@color/label_tertiary"
             app:layout_constraintStart_toStartOf="@id/importance"
-            app:layout_constraintTop_toBottomOf="@id/deadline"/>
+            app:layout_constraintTop_toBottomOf="@id/deadline" />
 
         <TextView
             android:id="@+id/delete"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:gravity="center"
+            android:textColor="@color/red"
             android:text="@string/delete"
-            android:textColor="?attr/color_red"
             app:layout_constraintStart_toEndOf="@id/delete_button"
-            app:layout_constraintTop_toTopOf="@id/delete_button"/>
+            app:layout_constraintTop_toTopOf="@id/delete_button" />
 
         <ImageButton
             android:id="@+id/delete_button"
+            style="@style/DeleteButtonStyle"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/delete"
             android:layout_marginTop="6dp"
-            android:background="?attr/back_primary"
-            app:layout_constraintTop_toBottomOf="@id/date"
+            android:src="@drawable/delete"
             app:layout_constraintStart_toStartOf="@id/importance"
-            app:tint="?attr/color_red">
-        </ImageButton>
+            app:layout_constraintTop_toBottomOf="@id/date">
 
+        </ImageButton>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
