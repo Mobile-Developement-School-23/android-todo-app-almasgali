@@ -13,12 +13,14 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.almasgali.todoapp.R
-import com.almasgali.todoapp.util.Importance
-import com.almasgali.todoapp.util.TodoItem
+import com.almasgali.todoapp.data.Importance
+import com.almasgali.todoapp.data.TodoItem
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 class CustomAdapter(private val data: ArrayList<TodoItem>,
-                    private val context: Context?,
                     private val onEditClicked: (TodoItem) -> Unit) :
     RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
@@ -29,6 +31,7 @@ class CustomAdapter(private val data: ArrayList<TodoItem>,
         private val date = view.findViewById<TextView>(R.id.date)
         private val info = view.findViewById<ImageButton>(R.id.info)
         private val priority = view.findViewById<ImageView>(R.id.priority)
+        private val context = view.context
 
         private val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
 
@@ -36,7 +39,9 @@ class CustomAdapter(private val data: ArrayList<TodoItem>,
             taskText.text = todoItem.text
             checkBox.isChecked = todoItem.isDone
             if (todoItem.deadline != null) {
-                date.text = todoItem.deadline.format(formatter)
+                val localDate: LocalDate = Instant.ofEpochMilli(todoItem.deadline).atZone(
+                    ZoneId.systemDefault()).toLocalDate()
+                date.text = localDate.format(formatter)
                 date.visibility = View.VISIBLE
             } else {
                 date.visibility = View.INVISIBLE

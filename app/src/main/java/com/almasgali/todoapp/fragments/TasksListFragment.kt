@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.almasgali.todoapp.R
 import com.almasgali.todoapp.adapter.CustomAdapter
 import com.almasgali.todoapp.model.TasksListViewModel
-import com.almasgali.todoapp.util.TodoItemsRepository
+import com.almasgali.todoapp.data.TodoItemsRepository
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class TasksListFragment : Fragment() {
@@ -33,7 +33,7 @@ class TasksListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view =  inflater.inflate(R.layout.tasks_list, container, false)
-        val data = TodoItemsRepository.getInstance()
+        val data = TodoItemsRepository.getInstance(context!!)
         val list = data.getList()
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
         val button = view.findViewById<FloatingActionButton>(R.id.add_button)
@@ -42,7 +42,7 @@ class TasksListFragment : Fragment() {
             list.removeAll{ it.isDone }
             hideCheckbox.isChecked = true
         }
-        val adapter = CustomAdapter(list, context) {
+        val adapter = CustomAdapter(list) {
             viewModel.onEditClicked(it)
             findNavController().navigate(R.id.toAddOrEditTaskFragment)
         }

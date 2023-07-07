@@ -9,13 +9,10 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/back_primary">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/header_title"
-            android:textColor="?attr/label_primary"
-            android:background="?attr/back_primary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -33,15 +30,12 @@
             android:layout_marginTop="24dp"
             android:button="@drawable/checkbox"
             android:src="@drawable/visibility"
-            android:background="?attr/back_primary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
         </CheckBox>
 
         <TextView
-            android:background="?attr/back_primary"
             android:id="@+id/count_completed"
-            android:textColor="?attr/label_secondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -51,7 +45,6 @@
         </TextView>
 
         <ScrollView
-            android:background="?attr/back_primary"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -59,7 +52,6 @@
             app:layout_constraintTop_toBottomOf="@id/count_completed">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:background="?attr/back_primary"
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
