@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/taskListFragment"
-        android:name="com.almasgali.todoapp.fragments.TasksListFragment"
+        android:name="com.almasgali.todoapp.ui.fragments.TasksListFragment"
         android:label="fragment_task_list"
         tools:layout="@layout/tasks_list">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/addOrEditTaskFragment"
-        android:name="com.almasgali.todoapp.fragments.AddOrEditTaskFragment"
+        android:name="com.almasgali.todoapp.ui.fragments.AddOrEditTaskFragment"
         android:label="fragment_task_list"
         tools:layout="@layout/add_or_edit_task">
         <action
