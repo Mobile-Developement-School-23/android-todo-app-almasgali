@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ToDo App</string>
+    <string name="app_name">TodoApp</string>
     <string name="save">Save</string>
     <string name="close">Close</string>
     <string name="fill_hint">Enter something…</string>

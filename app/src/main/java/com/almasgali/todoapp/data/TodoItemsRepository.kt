@@ -1,64 +1,66 @@
 package com.almasgali.todoapp.data
 
-import android.content.Context
-import androidx.room.Room
-import com.almasgali.todoapp.api.data.TodoItemsRequest
-import com.almasgali.todoapp.api.network.TodoClient
-import com.almasgali.todoapp.database.TodoDatabase
-import com.almasgali.todoapp.database.dao.TodoDao
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import kotlin.collections.ArrayList
+import com.almasgali.todoapp.api.data.RemoteDataSource
+import com.almasgali.todoapp.data.model.TodoItem
+import com.almasgali.todoapp.util.StatusCode
+import com.almasgali.todoapp.util.fromRemoteToLocal
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class TodoItemsRepository private constructor(context: Context) {
+@Singleton
+class TodoItemsRepository @Inject constructor(
+    private val localDataSource: LocalDataSource,
+    private val remoteDataSource: RemoteDataSource
+) {
 
-    companion object : SingletonHolder<TodoItemsRepository, Context>(::TodoItemsRepository)
-
-    private var list: ArrayList<TodoItem> = ArrayList()
-    private val todoClient = TodoClient()
-    private val todoDao: TodoDao
-
-    init {
-        todoDao = Room.databaseBuilder(context, TodoDatabase::class.java, "todoitems").build().todoDao()
+    companion object Constants {
+        val OK_CODES = 200..299
     }
 
-    suspend fun updateFromServer() {
-        withContext(Dispatchers.IO) {
-            val fromServer = todoClient.getFromServer()
-            todoDao.insertAll(fromServer)
-            list = ArrayList(todoDao.getAll())
+    suspend fun updateFromServer(): StatusCode {
+        val response = remoteDataSource.getTodoList()
+        if (response.code() in OK_CODES) {
+            localDataSource.insertTodoList(response.body()!!.list.map { fromRemoteToLocal(it) })
+            remoteDataSource.setRevision(response.body()!!.revision)
+            return StatusCode.SUCCESS
         }
+        return StatusCode.FAIL
     }
 
-    suspend fun updateToServer() {
-        todoClient.patchToServer(TodoItemsRequest("ok", list))
+    suspend fun updateToServer(): StatusCode {
+        val response = remoteDataSource.patchTodoList(localDataSource.getTodoList())
+        if (response.code() in OK_CODES) {
+            remoteDataSource.setRevision(response.body()!!.revision)
+            return StatusCode.SUCCESS
+        }
+        return StatusCode.FAIL
     }
 
-    fun getList() = ArrayList(list)
+    fun getListFlow() = localDataSource.getTodoListFlow()
+
+    fun getList() = localDataSource.getTodoList()
 
     suspend fun add(todoItem: TodoItem) {
-        withContext(Dispatchers.IO) {
-            list.add(todoItem)
-            todoDao.insert(todoItem)
+        localDataSource.insertTodoItem(todoItem)
+        val response = remoteDataSource.postTodoItem(todoItem)
+        if (response.code() in OK_CODES) {
+            remoteDataSource.setRevision(response.body()!!.revision)
         }
     }
 
     suspend fun edit(todoItem: TodoItem) {
-        withContext(Dispatchers.IO) {
-            for (i in 0 until list.size) {
-                if (list[i].id == todoItem.id) {
-                    list[i] = todoItem
-                    break
-                }
-            }
-            todoDao.insert(todoItem)
+        localDataSource.insertTodoItem(todoItem)
+        val response = remoteDataSource.putTodoItem(todoItem)
+        if (response.code() in OK_CODES) {
+            remoteDataSource.setRevision(response.body()!!.revision)
         }
     }
 
     suspend fun delete(todoItem: TodoItem) {
-        withContext(Dispatchers.IO) {
-            list.remove(todoItem)
-            todoDao.delete(todoItem)
+        localDataSource.deleteTodoItem(todoItem)
+        val response = remoteDataSource.deleteTodoItem(todoItem)
+        if (response.code() in OK_CODES) {
+            remoteDataSource.setRevision(response.body()!!.revision)
         }
     }
 }

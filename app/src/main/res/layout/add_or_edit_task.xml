@@ -24,6 +24,7 @@
 
         <TextView
             android:id="@+id/save"
+            android:background="@drawable/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -103,6 +104,7 @@
             android:layout_height="48dp"
             android:gravity="center"
             android:textColor="@color/red"
+            android:background="@drawable/text"
             android:text="@string/delete"
             app:layout_constraintStart_toEndOf="@id/delete_button"
             app:layout_constraintTop_toTopOf="@id/delete_button" />
@@ -114,6 +116,7 @@
             android:layout_height="48dp"
             android:layout_marginTop="6dp"
             android:src="@drawable/delete"
+            android:clickable="true"
             app:layout_constraintStart_toStartOf="@id/importance"
             app:layout_constraintTop_toBottomOf="@id/date">
 

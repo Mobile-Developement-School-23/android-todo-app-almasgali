@@ -1,0 +1,21 @@
+package com.almasgali.todoapp.data.model
+
+import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.SerialName
+
+@Parcelize
+@Entity(tableName = "todoitems")
+data class TodoItem(
+    @PrimaryKey @SerialName("id") val id: String,
+    @SerialName("text") val text: String,
+    @SerialName("importance") val importance: Importance,
+    @SerialName("deadline") val deadline: Long?,
+    @SerialName("done") var isDone: Boolean,
+    @SerialName("color") var color: String? = null,
+    @SerialName("created_at") val created: Long,
+    @SerialName("changed_at") val edited: Long?,
+    @SerialName("last_updated_by") val lastUpdatedBy: String,
+) : Parcelable
